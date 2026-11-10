@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My 2027 Planner – The Year of Becoming</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6efe3;--card:#fffaf2;--ink:#4a3b30;--mute:#8a7968;--tan:#ead2b3;--sage:#a8b596;--sage-d:#6f7f5f;--pink:#f1d3ce;--line:#e4d6c0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#201a16;--card:#2a231e;--ink:#f1e7d8;--mute:#b3a390;--tan:#5a4635;--sage:#7f8f6e;--sage-d:#b5c4a2;--pink:#5a3b38;--line:#3d332b}}
+:root[data-theme="dark"]{--bg:#201a16;--card:#2a231e;--ink:#f1e7d8;--mute:#b3a390;--tan:#5a4635;--sage:#7f8f6e;--sage-d:#b5c4a2;--pink:#5a3b38;--line:#3d332b}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'DM Sans',system-ui,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:20px 18px 60px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;margin:0;font-weight:700}
+.script{font-family:'Caveat','Segoe Script',cursive;font-weight:700}
+.cover{text-align:center;padding:48px 20px 36px;background:var(--tan);border-radius:28px;position:relative}
+.cover small{letter-spacing:.2em;text-transform:uppercase;color:var(--mute);font-size:12px}
+.cover h1{font-size:clamp(40px,9vw,68px);line-height:1.05;margin:10px 0 4px}
+.cover .script{font-size:28px;color:var(--sage-d)}
+.bar{height:10px;background:var(--card);border-radius:99px;margin:22px auto 6px;max-width:360px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--sage-d);width:0;transition:width .4s}
+.pct{font-size:13px;color:var(--mute)}
+nav{display:flex;gap:8px;overflow-x:auto;padding:18px 0 6px}
+nav a{flex:none;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:99px;font-size:14px}
+nav a:hover{background:var(--pink)}
+section{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:22px}
+section h2{font-size:24px}
+.tag{display:inline-block;background:var(--tan);padding:2px 12px;border-radius:99px;font-size:12px;margin-bottom:8px}
+.sub{color:var(--mute);margin:2px 0 14px;font-size:15px}
+.item{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.item:last-of-type{border-bottom:0}
+.item input{appearance:none;flex:none;width:22px;height:22px;border:2px solid var(--sage-d);border-radius:7px;margin:1px 0 0;cursor:pointer;display:grid;place-content:center}
+.item input:checked{background:var(--sage-d)}
+.item input:checked::after{content:"✓";color:var(--card);font-size:14px;line-height:1}
+.item input:checked+span{text-decoration:line-through;color:var(--mute)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:16px}
+@media(max-width:640px){.cols{grid-template-columns:1fr}}
+.box{background:var(--bg);border-radius:16px;padding:14px 16px}
+.box h3{font-size:16px;margin-bottom:6px}
+.box ul{margin:0;padding-left:18px;color:var(--mute);font-size:14.5px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+label.f{font-size:12px;color:var(--mute);display:block}
+input.t,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-top:3px}
+textarea{min-height:84px;resize:vertical}
+input.t:focus,textarea:focus,select:focus{outline:2px solid var(--sage);outline-offset:1px}
+.prio{background:var(--pink);border-radius:20px;padding:20px 24px;margin-top:22px}
+.prio ol{margin:8px 0 0;padding-left:22px}
+.prio li{padding:3px 0}
+.prio .script{font-size:24px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
+th,td{padding:7px 4px;text-align:center}
+th:first-child,td:first-child{text-align:left;padding-left:0;white-space:nowrap}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);background:none;cursor:pointer;padding:0}
+.dot.on{background:var(--sage-d);border-color:var(--sage-d)}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.foot{text-align:center;margin-top:34px}
+.foot .script{font-size:26px}
+button.mini{font:inherit;font-size:13px;background:none;border:1px solid var(--line);color:var(--mute);border-radius:99px;padding:5px 14px;cursor:pointer;margin-top:10px}
+@media print{nav,button.mini{display:none}section{break-inside:avoid}}
+.remind{background:var(--pink);border-radius:14px;padding:12px 16px;margin:14px 0;font-size:15px}
+.row{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line)}
+.ck{appearance:none;flex:none;width:22px;height:22px;border:2px solid var(--sage-d);border-radius:7px;margin:22px 0 0;cursor:pointer;display:grid;place-content:center}
+.ck:checked{background:var(--sage-d)}.ck:checked::after{content:"✓";color:var(--card);font-size:14px;line-height:1}
+#bulanan h3,#semua h3{font-size:18px;margin-top:20px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0 16px}
+.cal b{font-size:12px;color:var(--mute);text-align:center;font-weight:500}
+.cal button{aspect-ratio:1;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;font:inherit;cursor:pointer;position:relative}
+.cal button.has::after{content:"";position:absolute;bottom:5px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--sage-d)}
+.cal button.full{background:var(--sage)}.cal button.sel{outline:2px solid var(--sage-d)}
+.x{background:none;border:0;color:var(--mute);font-size:20px;cursor:pointer;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 10px}.chip b{color:var(--sage-d)}
+.ah{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px}
+.item select{font-size:13px;padding:4px 8px;flex:none}
+.panel{display:none}.panel.on{display:block}
+#habits h3{font-size:18px;margin-top:22px}
+.sq{width:22px;height:22px;border-radius:6px;border:2px solid var(--line);background:none;cursor:pointer;padding:0}
+.sq.on{background:var(--sage-d);border-color:var(--sage-d)}
+.cal button.per{background:var(--pink);border-color:var(--sage-d);font-weight:700}
+.cal button.pred{border:2px dashed var(--sage-d)}
+nav{flex-direction:column;gap:2px;overflow:visible;padding:14px 0 0}
+.nr{display:flex;gap:8px;overflow-x:auto;padding:6px 0}
+.nl{flex:none;align-self:center;font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em}
+nav a.on{background:var(--sage-d);color:var(--card);border-color:var(--sage-d)}
+@media print{.panel{display:block}#tabs{display:none}}
+.wrap{padding-bottom:120px}
+button{transition:transform .1s}button:active{transform:scale(.96)}
+.cover{transition:padding .2s}
+.cover.mini{padding:16px;border-radius:20px}
+.cover.mini small,.cover.mini .script,.cover.mini .bar,.cover.mini .pct{display:none}
+.cover.mini h1{font-size:26px;margin:0}
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;gap:2px;background:var(--card);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+#tabs button{flex:1;max-width:120px;background:none;border:0;color:var(--mute);font:inherit;font-size:11px;padding:6px 2px;border-radius:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+#tabs button span{font-size:21px;line-height:1}
+#tabs button.on{color:var(--ink);background:var(--tan);font-weight:700}
+.item{padding:12px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+<small>Guide · Planner · Journal</small>
+<h1>My 2027 Wishlist</h1>
+<div class="script">The Year of Becoming ♡</div>
+<div class="bar"><i id="pbar"></i></div>
+<div class="pct" id="ptxt">0% tercapai</div>
+</header>
+<nav id="nav"></nav>
+
+<div class="prio" id="home">
+<div class="script">My 2027 Priorities</div>
+<ol>
+<li>Mulai perjalanan S2</li><li>Lebih kuat secara finansial</li><li>Kembangkan platform food reviewer</li>
+<li>Perbaiki kesehatan &amp; bangun kebiasaan berkelanjutan</li><li>Traveling ke tempat baru</li><li>Benar-benar bahagia ♡</li>
+</ol>
+<p class="sub" style="margin:12px 0 0">Dan yang terpenting… <em>jadi versi terbaik dari diriku.</em></p>
+</div>
+
+<section id="bulanan">
+<span class="tag">Planner</span>
+<h2>Planner Bulanan</h2>
+<p class="sub">Pilih bulan, tentukan 1 aksi untuk tiap kategori wishlist, lalu detailkan to-do harian.</p>
+<select id="pm" aria-label="Pilih bulan"></select>
+<div class="remind" id="remind"></div>
+<h3>Satu aksi per kategori</h3>
+<div id="mcats"></div>
+<h3>To-do harian</h3>
+<p class="sub" id="rsum" style="margin-bottom:0"></p>
+<div class="cal" id="cal"></div>
+<div class="box" id="day"></div>
+</section>
+
+<section id="semua">
+<span class="tag">Overview</span>
+<h2>Semua Wishlist 2027</h2>
+<p class="sub">Satu tampilan untuk memantau seluruh wishlist. Centang yang sudah tercapai dan pilih target bulan tiap impian.</p>
+<div class="chips" id="chips"></div>
+<div id="all"></div>
+</section>
+
+<div id="cats"></div>
+
+<section id="habits">
+<span class="tag">Tracker</span>
+<h2>Habit Tracker</h2>
+<h3>Harian</h3>
+<select id="hm" aria-label="Pilih bulan" style="margin-top:6px"></select>
+<p class="sub" style="margin-top:10px">Ketuk kotak untuk menandai kebiasaan yang sudah dilakukan hari itu (tersinkron dengan planner bulanan).</p>
+<div class="scroll"><table id="dtable"></table></div>
+<h3>Bulanan</h3>
+<p class="sub">Ketuk lingkaran jika kebiasaan itu sudah konsisten di bulan tersebut.</p>
+<div class="scroll"><table id="htable"></table></div>
+</section>
+
+<section id="periode">
+<span class="tag">Tracker</span>
+<h2>Menstrual Tracker</h2>
+<p class="sub">Ketuk tanggal untuk menandai hari haid. Perkiraan siklus dihitung dari rata-rata yang kamu catat, bukan pengganti saran dokter.</p>
+<select id="pp" aria-label="Pilih bulan"></select>
+<div class="remind" id="psum" style="margin-top:12px"></div>
+<div class="cal" id="pcal"></div>
+<label class="f">Catatan bulan ini (gejala, mood, energi)</label>
+<textarea id="pnote"></textarea>
+</section>
+
+<section id="journal">
+<span class="tag">Journal</span>
+<h2>Jurnal &amp; Refleksi Bulanan</h2>
+<p class="sub">Luangkan 10 menit di akhir setiap bulan.</p>
+<select id="msel" aria-label="Pilih bulan"></select>
+<div class="cols" style="margin-top:12px">
+<div><label class="f">Fokus bulan ini</label><textarea data-j="fokus"></textarea></div>
+<div><label class="f">Hal yang aku syukuri</label><textarea data-j="syukur"></textarea></div>
+<div><label class="f">Pencapaian kecil</label><textarea data-j="menang"></textarea></div>
+<div><label class="f">Evaluasi &amp; rencana bulan depan</label><textarea data-j="evaluasi"></textarea></div>
+</div>
+</section>
+
+<div class="foot">
+<div class="script">grateful, always ♡</div>
+<p class="pct">Semua isian tersimpan otomatis di perangkat ini.</p>
+<button class="mini" id="theme">Ganti tema</button>
+<button class="mini" onclick="window.print()">Cetak</button>
+</div>
+</div>
+
+<script>
+const CATS=[
+{id:"karier",n:"1. Education & Career",sub:"Fondasi masa depan",items:["Mulai S2 Psikologi Industri dan Organisasi","Temukan topik tesis yang bikin semangat","Ikut minimal 2 workshop / seminar profesional","Bangun pengetahuan HR, people development & psikologi organisasi","Raih satu pencapaian karier yang bermakna"],tips:["Riset 3 kampus & jadwal pendaftaran","Baca 1 jurnal PIO tiap minggu","Catat ide topik tesis di notes"],fields:["Kampus tujuan","Target mulai"]},
+{id:"finansial",n:"2. Financial Freedom",sub:"Tenang karena siap",items:["Menabung secara konsisten","Jaga dana darurat tetap aman","Mulai dana khusus S2","Punya dana travel terpisah","Stop beli impulsif, belanja dengan sadar"],tips:["Auto-transfer tabungan di hari gajian","Aturan tunggu 48 jam sebelum beli","Review pengeluaran tiap akhir bulan"],fields:["Target dana darurat","Target dana S2","Target dana travel"]},
+{id:"travel",n:"3. Travel & Experiences",sub:"Dunia yang lebih luas",items:["Kunjungi Singapura atau Malaysia","Rencanakan liburan internasional (UK / Eropa)","Jelajahi lebih banyak tempat indah di Indonesia","Lebih sering solo date","Coba sesuatu yang benar-benar baru","Umrah"],tips:["Buat daftar 5 destinasi + estimasi biaya","Cek promo tiket 3–4 bulan sebelumnya","Satu pengalaman baru setiap kuartal"],fields:["Destinasi terdekat","Estimasi biaya"]},
+{id:"sehat",n:"4. Health & Personal Growth",sub:"Tubuh, pikiran, dan kebiasaan",items:["Menuju 60 kg dengan cara sehat","Bangun rutinitas olahraga yang konsisten","Perbaiki kualitas tidur","Baca minimal 6 buku","Lebih percaya diri berbicara bahasa Inggris"],tips:["Mulai 3x olahraga per minggu, naik bertahap","Jam tidur tetap & layar mati 30 menit sebelumnya","1 buku tiap 2 bulan, 15 menit per hari"],fields:["Berat awal","Berat saat ini","Daftar buku 2027"]},
+{id:"brand",n:"5. Personal Brand & Creativity",sub:"Create, share, inspire",items:["Lebih konsisten di Threads","Kembangkan akun food reviewer","Dapat minimal 3 kolaborasi food berbayar","Kembangkan gaya review yang khas","Bangun portofolio sebagai food content creator"],tips:["Jadwal posting tetap (mis. 3x seminggu)","Tentukan 3 ciri khas gaya reviewmu","Simpan konten terbaik di satu portofolio"],fields:["Followers awal","Target followers","Kolaborasi selesai"]},
+{id:"loved",n:"6. Loved Ones & Life",sub:"Hidup yang hangat",items:["Lebih banyak waktu berkualitas bersama keluarga","Dukung pendidikan adik","Ciptakan lebih banyak kenangan bermakna","Lebih banyak waktu berkualitas dengan diri sendiri","Konsisten dalam ibadah / salat","Belajar menikmati hidup tanpa terburu-buru"],tips:["Jadwalkan 1 agenda keluarga tiap bulan","Sisihkan dana pendidikan adik","Sehari 10 menit tanpa gawai untuk diri sendiri"],fields:["Agenda keluarga bulan ini"]},
+{id:"luxury",n:"7. Little Luxuries",sub:"Hadiah untuk diri sendiri",items:["MacBook untuk S2 & produktivitas","Tas harian yang berkualitas","Perhiasan timeless","Ruang tinggal yang nyaman","Makanan enak, kopi enak, mood enak"],tips:["Beri tiap wishlist harga & target bulan","Beli dari tabungan, bukan impulsif","Rayakan tiap pencapaian dengan 1 treat kecil"],fields:["Prioritas pertama","Harga target"]}
+];
+const HAB=["Menabung","Posting konten"];
+const MON=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+let S={c:{},t:{},h:{},j:{}};
+try{const r=localStorage.getItem("plan2027");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem("plan2027",JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+$("#nav").innerHTML=['<a href="#home">Prioritas</a>','<a href="#bulanan">Bulanan</a>','<a href="#semua">Semua Wishlist</a>'].concat(CATS.map(c=>`<a href="#${c.id}">${c.n.replace(/^\d\. /,"")}</a>`),['<a href="#habits">Habit</a>','<a href="#journal">Jurnal</a>']).join("");
+
+$("#cats").innerHTML=CATS.map(c=>`<section id="${c.id}">
+<span class="tag">Kategori</span><h2>${c.n}</h2><p class="sub">${c.sub}</p>
+${c.items.map((x,i)=>`<label class="item"><input type="checkbox" data-c="${c.id}-${i}"><span>${x}</span></label>`).join("")}
+<div class="cols"><div class="box"><h3>Langkah kecil</h3><ul>${c.tips.map(t=>`<li>${t}</li>`).join("")}</ul></div>
+<div class="box"><h3>Catatan</h3><textarea data-n="${c.id}" placeholder="Tulis rencana, ide, atau progresmu…"></textarea></div></div>
+<div class="fields">${c.fields.map((f,i)=>`<div><label class="f">${f}</label><input class="t" data-f="${c.id}-${i}"></div>`).join("")}</div>
+</section>`).join("");
+
+$("#htable").innerHTML="<tr><th></th>"+MON.map(m=>`<th>${m.slice(0,3)}</th>`).join("")+"</tr>"+
+HAB.map((h,i)=>`<tr><td>${h}</td>${MON.map((m,j)=>`<td><button class="dot" data-h="${i}-${j}" aria-label="${h} ${m}"></button></td>`).join("")}</tr>`).join("");
+
+$("#msel").innerHTML=MON.map((m,i)=>`<option value="${i}">${m} 2027</option>`).join("");
+$("#msel").value=String(Math.min(11,Math.max(0,(new Date().getFullYear()===2027?new Date().getMonth():0))));
+
+function prog(){
+const all=[...document.querySelectorAll("[data-c]")];
+const d=all.filter(x=>x.checked).length;
+const p=Math.round(d/all.length*100);
+$("#pbar").style.width=p+"%";$("#ptxt").textContent=p+"% tercapai · "+d+" dari "+all.length+" wishlist";
+}
+document.querySelectorAll("[data-c]").forEach(e=>{e.checked=!!S.c[e.dataset.c];e.onchange=()=>{S.c[e.dataset.c]=e.checked;save();prog()}});
+document.querySelectorAll("[data-n]").forEach(e=>{e.value=S.t["n"+e.dataset.n]||"";e.oninput=()=>{S.t["n"+e.dataset.n]=e.value;save()}});
+document.querySelectorAll("[data-f]").forEach(e=>{e.value=S.t["f"+e.dataset.f]||"";e.oninput=()=>{S.t["f"+e.dataset.f]=e.value;save()}});
+document.querySelectorAll("[data-h]").forEach(e=>{e.classList.toggle("on",!!S.h[e.dataset.h]);e.onclick=()=>{S.h[e.dataset.h]=!S.h[e.dataset.h];e.classList.toggle("on",S.h[e.dataset.h]);save()}});
+function loadJ(){document.querySelectorAll("[data-j]").forEach(e=>{e.value=S.j[$("#msel").value+e.dataset.j]||""})}
+document.querySelectorAll("[data-j]").forEach(e=>{e.oninput=()=>{S.j[$("#msel").value+e.dataset.j]=e.value;save()}});
+$("#msel").onchange=loadJ;loadJ();prog();
+S.m=S.m||{};S.d=S.d||{};S.tm=S.tm||{};
+const q=s=>esc(s).replace(/"/g,"&quot;");
+const short=c=>c.n.replace(/^\d\. /,"");
+let sel=1;const pm=$("#pm");
+pm.innerHTML=MON.map((m,i)=>`<option value="${i}">${m} 2027</option>`).join("");pm.value="0";
+
+/* Overview semua wishlist */
+$("#all").innerHTML=CATS.map(c=>`<div class="ah"><h3 style="margin:0">${c.n}</h3><span class="pct" data-cs="${c.id}"></span></div>`+c.items.map((x,i)=>`<label class="item"><input type="checkbox" data-c="${c.id}-${i}"><span style="flex:1">${x}</span><select data-tm="${c.id}-${i}" aria-label="Target bulan"><option value="">Target…</option>${MON.map((m,j)=>`<option value="${j}">${m.slice(0,3)}</option>`).join("")}</select></label>`).join("")).join("");
+function stats(){
+CATS.forEach(c=>{const n=c.items.length;const d=c.items.filter((_,i)=>S.c[c.id+"-"+i]).length;const el=document.querySelector('[data-cs="'+c.id+'"]');if(el)el.textContent=d+" / "+n});
+$("#chips").innerHTML=MON.map((m,j)=>{const n=Object.values(S.tm).filter(v=>v===String(j)).length;return `<span class="chip">${m.slice(0,3)} <b>${n}</b></span>`}).join("")}
+document.querySelectorAll("[data-c]").forEach(e=>{e.checked=!!S.c[e.dataset.c];e.onchange=()=>{S.c[e.dataset.c]=e.checked;document.querySelectorAll('[data-c="'+e.dataset.c+'"]').forEach(o=>o.checked=e.checked);save();prog();stats()}});
+document.querySelectorAll("[data-tm]").forEach(e=>{e.value=S.tm[e.dataset.tm]||"";e.onchange=()=>{S.tm[e.dataset.tm]=e.value;save();stats()}});
+stats();
+
+/* Planner bulanan */
+function remind(){const m=pm.value;const left=CATS.filter(c=>!(S.m[m+"-"+c.id]||{}).d);
+$("#remind").innerHTML=left.length?`🔔 <b>Reminder ${MON[m]}:</b> baru ${CATS.length-left.length}/${CATS.length} kategori tersentuh. Belum: ${left.map(short).join(", ")}.`:`✨ Semua ${CATS.length} kategori sudah tersentuh di ${MON[m]}. Keren!`}
+function renderM(){const m=pm.value;
+$("#mcats").innerHTML=CATS.map(c=>{const k=m+"-"+c.id;const v=S.m[k]||{t:"",d:false};
+return `<div class="row"><input type="checkbox" class="ck" data-md="${k}" ${v.d?"checked":""} aria-label="Selesai"><div style="flex:1"><label class="f">${short(c)}</label><input class="t" data-mt="${k}" value="${q(v.t)}" placeholder="Mis. ${q(c.tips[0])}"></div></div>`}).join("");
+document.querySelectorAll("[data-md]").forEach(e=>e.onchange=()=>{(S.m[e.dataset.md]=S.m[e.dataset.md]||{t:"",d:false}).d=e.checked;save();remind()});
+document.querySelectorAll("[data-mt]").forEach(e=>e.oninput=()=>{(S.m[e.dataset.mt]=S.m[e.dataset.mt]||{t:"",d:false}).t=e.value;save()});
+remind();renderCal();renderD()}
+const RT=["Tahajjud","Makan makanan sehat","Salat 5 waktu penuh","Baca Al-Qur’an","Olahraga","Baca buku"];S.r=S.r||{};
+const rdone=(m,d)=>RT.filter((_,i)=>S.r[m+"-"+d+"-"+i]).length;
+function renderCal(){const m=+pm.value;const n=new Date(2027,m+1,0).getDate();const off=(new Date(2027,m,1).getDay()+6)%7;
+let h=["Sen","Sel","Rab","Kam","Jum","Sab","Min"].map(d=>`<b>${d}</b>`).join("")+"<i></i>".repeat(off);
+let full=0;for(let d=1;d<=n;d++){const L=S.d[m+"-"+d]||[];const rc=rdone(m,d);const allR=rc===RT.length;if(allR)full++;h+=`<button data-day="${d}" class="${(L.length||rc)?"has ":""}${allR&&L.every(x=>x.d)?"full ":""}${d===sel?"sel":""}">${d}</button>`}
+$("#rsum").textContent="Rutinitas harian lengkap: "+full+" dari "+n+" hari";
+$("#cal").innerHTML=h;
+document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{sel=+b.dataset.day;renderCal();renderD()})}
+function renderD(){const m=pm.value,k=m+"-"+sel;const L=S.d[k]||[];const dt=new Date(2027,+m,sel);
+$("#day").innerHTML=`<h3 style="margin:0 0 6px">${dt.toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</h3>`+`<label class="f" style="margin-top:8px">Rutinitas harian</label>`+RT.map((t,i)=>{const on=!!S.r[m+"-"+sel+"-"+i];return `<div class="row"><input type="checkbox" class="ck" style="margin-top:2px" data-ri="${i}" ${on?"checked":""}><span style="flex:1${on?";text-decoration:line-through;color:var(--mute)":""}">${t}</span></div>`}).join("")+`<label class="f" style="margin-top:14px">To-do hari ini</label>`+
+L.map((x,i)=>`<div class="row"><input type="checkbox" class="ck" style="margin-top:2px" data-di="${i}" ${x.d?"checked":""}><span style="flex:1${x.d?";text-decoration:line-through;color:var(--mute)":""}">${esc(x.t)}</span><button class="x" data-dx="${i}" aria-label="Hapus">×</button></div>`).join("")+
+`<div style="display:flex;gap:8px;margin-top:10px"><input class="t" id="nt" placeholder="Tambah to-do hari ini…" style="margin:0"><button class="mini" id="add" style="margin:0">Tambah</button></div>`;
+const upd=()=>{S.d[k]=L;save();renderCal();renderD()};
+document.querySelectorAll("[data-ri]").forEach(e=>e.onchange=()=>{S.r[m+"-"+sel+"-"+e.dataset.ri]=e.checked;save();renderCal();renderD();renderH()});
+document.querySelectorAll("[data-di]").forEach(e=>e.onchange=()=>{L[+e.dataset.di].d=e.checked;upd()});
+document.querySelectorAll("[data-dx]").forEach(e=>e.onclick=()=>{L.splice(+e.dataset.dx,1);upd()});
+const add=()=>{const v=$("#nt").value.trim();if(v){L.push({t:v,d:false});upd();$("#nt").focus()}};
+$("#add").onclick=add;$("#nt").onkeydown=ev=>{if(ev.key==="Enter")add()}}
+pm.onchange=()=>{sel=1;renderM()};renderM();
+
+/* Habit harian */
+const hm=$("#hm");hm.innerHTML=MON.map((m,i)=>`<option value="${i}">${m} 2027</option>`).join("");hm.value="0";
+function renderH(){const m=+hm.value;const n=new Date(2027,m+1,0).getDate();
+let h="<tr><th></th>"+Array.from({length:n},(_,i)=>`<th>${i+1}</th>`).join("")+"</tr>";
+h+=RT.map((t,i)=>{let c=0,cells="";for(let d=1;d<=n;d++){const on=!!S.r[m+"-"+d+"-"+i];if(on)c++;cells+=`<td><button class="sq${on?" on":""}" data-rh="${d}-${i}" aria-label="${t} ${d}"></button></td>`}return `<tr><td>${t} <span class="pct">${c}/${n}</span></td>${cells}</tr>`}).join("");
+$("#dtable").innerHTML=h;
+document.querySelectorAll("[data-rh]").forEach(b=>b.onclick=()=>{const p=b.dataset.rh.split("-");const k=m+"-"+p[0]+"-"+p[1];S.r[k]=!S.r[k];save();renderH();renderCal();renderD()})}
+hm.onchange=renderH;renderH();
+
+/* Periode */
+S.p=S.p||{};S.pn=S.pn||{};
+const pp=$("#pp");pp.innerHTML=MON.map((m,i)=>`<option value="${i}">${m} 2027</option>`).join("");pp.value="0";
+const fmt=d=>d.toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"});
+function starts(){const ds=Object.keys(S.p).filter(k=>S.p[k]).map(k=>{const a=k.split("-");return new Date(2027,+a[0],+a[1])}).sort((a,b)=>a-b);
+const set=new Set(ds.map(d=>d.getTime()));
+return ds.filter(d=>!set.has(new Date(d.getFullYear(),d.getMonth(),d.getDate()-1).getTime()))}
+function renderP(){const m=+pp.value;const n=new Date(2027,m+1,0).getDate();const off=(new Date(2027,m,1).getDay()+6)%7;
+const st=starts();let pred=null;
+if(st.length){const last=st[st.length-1];const cl=[];for(let i=1;i<st.length;i++)cl.push(Math.round((st[i]-st[i-1])/864e5));
+const avg=cl.length?Math.round(cl.reduce((a,b)=>a+b,0)/cl.length):28;
+pred={d:new Date(last.getFullYear(),last.getMonth(),last.getDate()+avg),avg:avg,real:cl.length>0}}
+let h=["Sen","Sel","Rab","Kam","Jum","Sab","Min"].map(d=>`<b>${d}</b>`).join("")+"<i></i>".repeat(off);let cnt=0;
+for(let d=1;d<=n;d++){const on=!!S.p[m+"-"+d];if(on)cnt++;const isP=pred&&pred.d.getFullYear()===2027&&pred.d.getMonth()===m&&pred.d.getDate()===d;h+=`<button data-pd="${d}" class="${on?"per ":""}${isP&&!on?"pred":""}">${d}</button>`}
+$("#pcal").innerHTML=h;
+const ms=st.filter(d=>d.getMonth()===m);
+$("#psum").innerHTML="🌸 Hari haid bulan ini: <b>"+cnt+"</b>"+(ms.length?" · mulai tanggal <b>"+ms.map(d=>d.getDate()).join(", ")+"</b>":"")+(pred?"<br>Perkiraan haid berikutnya: <b>"+fmt(pred.d)+"</b> (siklus rata-rata "+pred.avg+" hari"+(pred.real?"":", perkiraan awal")+"). Tanggal putus-putus di kalender = perkiraan.":"<br>Tandai hari pertama haidmu untuk melihat perkiraan siklus.");
+$("#pnote").value=S.pn[m]||"";
+document.querySelectorAll("[data-pd]").forEach(b=>b.onclick=()=>{const k=m+"-"+b.dataset.pd;S.p[k]=!S.p[k];save();renderP()})}
+$("#pnote").oninput=()=>{S.pn[pp.value]=$("#pnote").value;save()};
+pp.onchange=renderP;renderP();
+
+/* Menu tab */
+const TABS=[["home","Beranda"],["bulanan","Bulanan"],["semua","Semua Wishlist"],["habits","Habit"],["periode","Periode"],["journal","Jurnal"]];
+const CL=["Career","Financial","Travel","Health","Brand","Loved Ones","Luxuries"];
+document.querySelectorAll("#home,#bulanan,#semua,#cats section,#habits,#periode,#journal").forEach(e=>e.classList.add("panel"));
+$("#nav").innerHTML=`<div class="nr">${TABS.map(t=>`<a href="#${t[0]}" data-go="${t[0]}">${t[1]}</a>`).join("")}</div><div class="nr"><span class="nl">Wishlist</span>${CATS.map((c,i)=>`<a href="#${c.id}" data-go="${c.id}">${i+1}. ${CL[i]}</a>`).join("")}</div>`;
+function show(id){const el=document.getElementById(id);if(!el||!el.classList.contains("panel"))id="home";
+document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===id));
+document.querySelectorAll("[data-go]").forEach(a=>a.classList.toggle("on",a.dataset.go===id));
+try{history.replaceState(null,"","#"+id)}catch(e){}}
+document.querySelectorAll("[data-go]").forEach(a=>a.onclick=ev=>{ev.preventDefault();show(a.dataset.go)});
+addEventListener("hashchange",()=>show(location.hash.slice(1)));
+show(location.hash.slice(1));
+
+/* UI v2: tab bawah + hari ini */
+var GROUP,BT;
+$("#home").insertAdjacentHTML("afterbegin",'<div id="today" class="box" style="background:var(--card);margin-bottom:18px"></div>');
+function renderT(){const n=new Date();const is27=n.getFullYear()===2027;const m=is27?n.getMonth():0,d=is27?n.getDate():1;
+const dt=new Date(2027,m,d);
+$("#today").innerHTML=`<div class="script" style="font-size:26px">${is27?"Hari ini":"Pratinjau 1 Januari 2027"}</div><div class="sub" style="margin:0 0 6px">${dt.toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})} · ${rdone(m,d)}/${RT.length} rutinitas</div>`+RT.map((t,i)=>`<label class="item"><input type="checkbox" data-tr="${i}" ${S.r[m+"-"+d+"-"+i]?"checked":""}><span>${t}</span></label>`).join("")+`<button class="mini" id="gotoday">Buka to-do hari ini →</button>`;
+document.querySelectorAll("[data-tr]").forEach(e=>e.onchange=()=>{S.r[m+"-"+d+"-"+e.dataset.tr]=e.checked;save();renderT();renderH();renderCal();renderD()});
+$("#gotoday").onclick=()=>{pm.value=String(m);sel=d;renderM();show("bulanan")}}
+GROUP=["semua"].concat(CATS.map(c=>c.id));
+BT=[["home","🏠","Beranda"],["bulanan","📅","Bulanan"],["semua","✨","Wishlist"],["habits","✅","Habit"],["periode","🌸","Periode"],["journal","📓","Jurnal"]];
+$("#nav").innerHTML=`<div class="nr">${[["semua","Semua"]].concat(CATS.map((c,i)=>[c.id,(i+1)+". "+CL[i]])).map(t=>`<a href="#${t[0]}" data-go="${t[0]}">${t[1]}</a>`).join("")}</div>`;
+const tabs=document.createElement("div");tabs.id="tabs";
+tabs.innerHTML=BT.map(t=>`<button data-tab="${t[0]}"><span>${t[1]}</span>${t[2]}</button>`).join("");document.body.appendChild(tabs);
+function show(id){if(!GROUP)return;const el=document.getElementById(id);if(!el||!el.classList.contains("panel"))id="home";
+document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===id));
+const g=GROUP.indexOf(id)>-1;$("#nav").style.display=g?"":"none";
+$(".cover").classList.toggle("mini",id!=="home");
+document.querySelectorAll("[data-go]").forEach(a=>a.classList.toggle("on",a.dataset.go===id));
+document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("on",b.dataset.tab===id||(g&&b.dataset.tab==="semua")));
+if(id==="home")renderT();
+try{history.replaceState(null,"","#"+id)}catch(e){}
+window.scrollTo(0,0)}
+document.querySelectorAll("[data-go]").forEach(a=>a.onclick=ev=>{ev.preventDefault();show(a.dataset.go)});
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>show(b.dataset.tab));
+show(location.hash.slice(1));
+
+$("#theme").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark"};
+</script>
+</body>
+</html>
